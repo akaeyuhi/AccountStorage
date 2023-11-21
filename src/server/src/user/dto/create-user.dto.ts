@@ -1,5 +1,4 @@
 import {
-  IsBoolean,
   IsEmail,
   IsEnum,
   IsInt,
@@ -9,6 +8,7 @@ import {
   Matches,
   MinLength,
 } from 'class-validator';
+import { Role } from '../../roles/roles.enum';
 
 const passwordRegEx =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,20}$/;
@@ -30,7 +30,7 @@ export class CreateUserDto {
   @IsInt()
   variant: number;
   @IsPhoneNumber()
-  telephone: number;
+  telephone: string;
   @IsNotEmpty()
   @Matches(passwordRegEx, {
     message: `Password must contain Minimum 8 and maximum 20 characters, 
@@ -43,6 +43,7 @@ export class CreateUserDto {
   @IsString()
   @IsEnum(['f', 'm', 'u'])
   gender: string;
-  @IsBoolean()
-  isAdmin: boolean;
+  @IsString()
+  @IsEnum(Role)
+  role: string = Role.User;
 }
