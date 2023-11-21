@@ -1,20 +1,9 @@
 import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { CreateUserDto } from '../dto/create-user.dto';
 import { hash } from 'bcrypt';
 import { Role } from '../../roles/roles.enum';
 
 @Entity()
 export class User {
-  constructor(userDTO: CreateUserDto) {
-    this.name = userDTO.name;
-    this.email = userDTO.email;
-    this.group = userDTO.group;
-    this.variant = userDTO.variant;
-    this.telephone = userDTO.telephone;
-    this.password = userDTO.password;
-    this.gender = userDTO.gender;
-  }
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -30,10 +19,10 @@ export class User {
   @Column({ type: 'int' })
   variant: number;
 
-  @Column({ type: 'int' })
-  telephone: number;
-
   @Column({ type: 'varchar' })
+  telephone: string;
+
+  @Column({ type: 'varchar', select: false })
   password: string;
 
   @Column({ type: 'enum', enum: ['m', 'f', 'u'] })
@@ -44,8 +33,11 @@ export class User {
    */
   gender: string;
 
-  @Column({ type: 'string' })
-  role: Role = Role.User;
+  @Column({ type: 'enum', enum: Role })
+  role: string = Role.User;
+
+  @Column({ type: 'varchar', nullable: true })
+  fileLink?: string;
 
   @BeforeInsert() async hashPassword() {
     this.password = await hash(this.password, 10);
