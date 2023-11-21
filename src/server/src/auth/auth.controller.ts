@@ -16,6 +16,16 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('register')
   async register(@Body() createUserDto: CreateUserDto) {
-    return this.authService.register(createUserDto);
+    const check = await this.authService.doesUserExists(createUserDto);
+    if (check) {
+      return {
+        message: 'User already exists',
+      };
+    }
+    const response = await this.authService.register(createUserDto);
+    return {
+      message: 'User has been created successfully',
+      response,
+    };
   }
 }
