@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import Loader from "../../utils/components/Loader";
-import ErrorMessage from "../../utils/components/ErrorMessage";
+import Loader from '../../utils/components/Loader';
+import ErrorMessage from '../../utils/components/ErrorMessage';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
 
-  const { error, loading, token } = useAppSelector((state) => state.account);
+  const { error, loading, token } = useAppSelector(state => state.account);
   const [formData, setFormData] = useState({
     username: '',
     password: '',

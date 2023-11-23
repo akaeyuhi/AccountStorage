@@ -1,4 +1,4 @@
-import { Role } from "../../utils/Roles";
+import { Role } from 'utils/Roles';
 
 export class User {
   name = '';

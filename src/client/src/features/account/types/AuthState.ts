@@ -1,4 +1,4 @@
-import { AuthStoreError } from "./AuthError";
+import { AuthStoreError } from './AuthError';
 
 export interface AuthState {
   user: User | null;

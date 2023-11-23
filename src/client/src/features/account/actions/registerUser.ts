@@ -1,7 +1,7 @@
 import { createAppAsyncThunk } from 'app/createAsyncThunk';
 import { AuthStoreError } from '../types/AuthError';
 import { AuthResponse } from '../types/AuthResponse';
-import { RegisterDto } from "services/interfaces/RegisterDto";
+import { RegisterDto } from 'services/interfaces/RegisterDto';
 
 export const registerUser = createAppAsyncThunk<
   AuthResponse,

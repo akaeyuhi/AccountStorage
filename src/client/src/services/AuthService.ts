@@ -1,8 +1,8 @@
 import BaseService from './BaseService';
 import AuthError from './errors/AuthError';
-import { AuthResponse } from '../features/account/types/AuthResponse';
-import { LoginDto } from "./interfaces/LoginDto";
-import { RegisterDto } from "./interfaces/RegisterDto";
+import { AuthResponse } from 'features/account/types/AuthResponse';
+import { LoginDto } from './interfaces/LoginDto';
+import { RegisterDto } from './interfaces/RegisterDto';
 
 export default class AuthService extends BaseService {
   async register(userData: RegisterDto): Promise<AuthResponse> {

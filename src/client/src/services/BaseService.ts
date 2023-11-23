@@ -1,5 +1,5 @@
 import { logout as storeLogout } from '../features/account/accountSlice';
-import { AppDispatch } from "../app/store";
+import { AppDispatch } from '../app/store';
 
 export default class BaseService {
   public token: string | null;
