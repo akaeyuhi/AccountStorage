@@ -14,7 +14,7 @@ function ErrorMessage({ error }: Props) {
 
   return (
     <div style={styles}>
-      <pre>Error: {error.message}</pre>
+      <pre>Error: {error.message ?? error}</pre>
     </div>
   );
 }
