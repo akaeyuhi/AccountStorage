@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router';
 import Loader from '../../utils/components/Loader';
 import ErrorMessage from '../../utils/components/ErrorMessage';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
+import ValidationError from 'utils/validation';
+import { loginUser } from 'features/account/actions/loginUser';
+import { LoginDto } from 'services/interfaces/LoginDto';
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
@@ -30,7 +33,7 @@ export default function LoginPage() {
       setErrors(validationErrors);
       return;
     }
-    const dto: UserDTO = { ...formData, username: formData.username };
+    const dto: LoginDto = { ...formData, email: formData.username };
     dispatch(loginUser(dto));
   };
   const failedValidationStyles = {
