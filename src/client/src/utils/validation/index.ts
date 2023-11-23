@@ -17,9 +17,9 @@ export default class ValidationError {
     this.description = description;
   }
   static defaultPasswordLength = 8;
-  static validate(data: { username: string; password: string }) {
+  static validate(data: { email: string; password: string }) {
     const validationErrors = [];
-    if (!data.username || !data.username.length)
+    if (!data.email || !data.email.length)
       validationErrors.push(
         new ValidationError(
           ValidationErrors.Username,
