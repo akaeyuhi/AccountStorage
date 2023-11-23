@@ -12,7 +12,7 @@ export default function LoginPage() {
 
   const { error, loading, token } = useAppSelector(state => state.account);
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
   });
   const [errors, setErrors] = useState<ValidationError[]>([]);
@@ -33,7 +33,7 @@ export default function LoginPage() {
       setErrors(validationErrors);
       return;
     }
-    const dto: LoginDto = { ...formData, email: formData.username };
+    const dto: LoginDto = { ...formData };
     dispatch(loginUser(dto));
   };
   const failedValidationStyles = {
@@ -42,6 +42,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (!error && token) return navigate('/');
+    console.log(error);
   }, [error]);
 
   if (loading) return <Loader />;
@@ -50,12 +51,12 @@ export default function LoginPage() {
     <main className="main">
       <form className="main__login" onSubmit={handleSubmit}>
         <h2 className="main__welcome">Welcome</h2>
-        {error && <ErrorMessage error={error} />}
+        { error && <ErrorMessage error={error} />}
         <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Username"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
           className="main__input"
           required
           onChange={handleChange}
@@ -66,7 +67,7 @@ export default function LoginPage() {
           }
         />
         {errors.some(error => error.type === 'email') && (
-          <p style={{ color: 'red' }}>Invalid username</p>
+          <p style={{ color: 'red', padding: '10px' }}>Invalid username</p>
         )}
         <input
           type="password"
@@ -83,7 +84,7 @@ export default function LoginPage() {
           }
         />
         {errors.some(error => error.type === 'password') && (
-          <p style={{ color: 'red' }}>Invalid password</p>
+          <p style={{ color: 'red', padding: '10px' }}>Invalid password</p>
         )}
         <div className="main__checkbox-container control-group">
           <label className="control control-checkbox">
