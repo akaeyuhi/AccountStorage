@@ -25,7 +25,8 @@ body {
 
 .main__login {
     min-width: 300px;
-    min-height: 350px;
+    min-height: 400px;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -174,13 +175,6 @@ body {
     font-size: 14px
 }
 
-.main__tasks {
-    background: #224957;
-    border-radius: 8px;
-    min-height: 320px;
-    min-width: 500px;
-    padding: 32px;
-}
 
 @media screen and (min-height: 1080px) {
     .main__tasks {
@@ -189,9 +183,17 @@ body {
     }
 }
 
-.main__todo {
+.main__text {
     font-size: 18px;
     margin-bottom: 16px;
+}
+
+.main__info {
+    background: #224957;
+    border-radius: 8px;
+    min-height: 320px;
+    min-width: 500px;
+    padding: 32px;
 }
 
 .main__task_list {
