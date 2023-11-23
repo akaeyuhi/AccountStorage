@@ -2,9 +2,9 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import accountSlice from '../features/account/accountSlice';
 import AuthService from '../services/AuthService';
 
-const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000/';
+const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:4000/';
 
-const authService = new AuthService(baseURL);
+const authService = new AuthService(baseURL + 'auth');
 
 export const store = configureStore({
   reducer: {
