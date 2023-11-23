@@ -10,11 +10,11 @@ export const registerUser = createAppAsyncThunk<
 >('account/register', async (dto: RegisterDto, { rejectWithValue, extra }) => {
   try {
     const response = await extra.authService.register(dto);
-    if ((response as any).message) {
+    if (!(response as any).response) {
       return rejectWithValue((response as any).message);
     }
     return response;
   } catch (error: any) {
-    return rejectWithValue(error.response.data.message ?? error.message);
+    return rejectWithValue(error.response.message ?? error.message);
   }
 });

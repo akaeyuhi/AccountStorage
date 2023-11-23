@@ -1,7 +1,7 @@
-import { createAppAsyncThunk } from '../../../app/createAsyncThunk';
+import { createAppAsyncThunk } from 'app/createAsyncThunk';
 import { AuthStoreError } from '../types/AuthError';
 import { AuthResponse } from '../types/AuthResponse';
-import { LoginDto } from '../../../services/interfaces/LoginDto';
+import { LoginDto } from 'services/interfaces/LoginDto';
 
 export const loginUser = createAppAsyncThunk<
   AuthResponse,
