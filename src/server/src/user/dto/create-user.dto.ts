@@ -41,9 +41,9 @@ export class CreateUserDto {
   })
   password: string;
   @IsString()
-  @IsEnum(['f', 'm', 'u'])
+  @IsEnum(['female', 'male', 'other'])
   gender: string;
   @IsString()
   @IsEnum(Role)
-  role: string = Role.User;
+  role: Role;
 }
