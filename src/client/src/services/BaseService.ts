@@ -7,24 +7,23 @@ export default class BaseService {
   private readonly baseURL: string;
   constructor(baseURL: string) {
     this.baseURL = baseURL;
-    this.token = null;
+    this.token = localStorage.getItem('loginToken') ?? null;
   }
 
   setToken(token: string | null) {
     this.token = token;
   }
 
-  async request(endpoint: string, method: string, body = {}) {
+  async request<T>(endpoint: string, method: string, body = {}): Promise<T> {
     const url = `${this.baseURL}${endpoint}`;
-
     try {
       const response = await fetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
-          ...(this.token ? { authorization: this.token } : {}),
+          ...(this.token ? { authorization: `Bearer ${this.token}` } : {}),
         },
-        body: JSON.stringify(body),
+        ...(method !== 'GET' ? { body: JSON.stringify(body) } : {}),
       });
 
       return await response.json();
