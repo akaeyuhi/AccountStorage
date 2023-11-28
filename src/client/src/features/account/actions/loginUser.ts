@@ -13,6 +13,7 @@ export const loginUser = createAppAsyncThunk<
     if ((response as any).message) {
       return rejectWithValue((response as any).message);
     }
+    if (!extra.userService.token) extra.userService.setToken(response.accessToken);
     return response;
   } catch (error: any) {
     return rejectWithValue(error.response.data.message ?? error.message);

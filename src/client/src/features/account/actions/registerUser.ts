@@ -13,6 +13,7 @@ export const registerUser = createAppAsyncThunk<
     if (!(response as any).response) {
       return rejectWithValue((response as any).message);
     }
+    if (!extra.userService.token) extra.userService.setToken(response.accessToken);
     return response;
   } catch (error: any) {
     return rejectWithValue(error.response.message ?? error.message);
