@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import ValidationError from 'utils/validation';
 import { loginUser } from 'features/account/actions/loginUser';
 import { LoginDto } from 'services/interfaces/LoginDto';
+import { Link } from 'react-router-dom';
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
@@ -42,8 +43,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (!error && token) return navigate('/');
-    console.log(error);
-  }, [error]);
+  }, [error, token]);
 
   if (loading) return <Loader />;
 
@@ -93,7 +93,8 @@ export default function LoginPage() {
             <div className="control_indicator" />
           </label>
         </div>
-        <input type="submit" value="Login" className="main__submit" />
+        <p className="main__link">Don't have an account? <Link to="/register">Register!</Link></p>
+        <button type="submit" className="main__submit" >Login</button>
       </form>
     </main>
   );
