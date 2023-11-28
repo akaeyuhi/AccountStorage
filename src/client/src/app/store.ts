@@ -1,19 +1,22 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import accountSlice from '../features/account/accountSlice';
 import AuthService from '../services/AuthService';
+import userSlice from 'features/user/userSlice';
+import UserService from 'services/UserService';
 
 const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:4000/';
 
 const authService = new AuthService(baseURL + 'auth');
-
+const userService = new UserService(baseURL + 'user');
 export const store = configureStore({
   reducer: {
     account: accountSlice,
+    user: userSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       thunk: {
-        extraArgument: { authService },
+        extraArgument: { authService, userService },
       },
     }),
 });
