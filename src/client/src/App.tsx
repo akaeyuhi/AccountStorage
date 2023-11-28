@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router';
-import LoginPage from 'pages/Login';
 import ErrorMessage from 'utils/components/ErrorMessage';
 import { useAppSelector } from 'app/hooks';
-import HomePage from 'pages/Home';
+import { AppRoutes, ProtectedAppRoutes } from 'utils/routes/AppRoutes';
+import ProtectedRoute from 'utils/routes';
 
 function App() {
   const navigate = useNavigate();
-  const { token } = useAppSelector(state => state.account);
+  const { user, token } = useAppSelector(state => state.account);
 
   useEffect(() => {
     if (token) {
@@ -19,8 +19,17 @@ function App() {
 
   return <div className="container">
     <Routes>
-      <Route path='/login' element={<LoginPage />} />
-      <Route path='/' element={<HomePage />} />
+      {AppRoutes.map((route, index) => {
+        const { element, ...rest } = route;
+        return <Route key={index} {...rest} element={element} />;
+      })}
+      {ProtectedAppRoutes.map((route, index) => {
+        const { element, path, ...rest } = route;
+        return <Route key={index} {...rest} element={
+          <ProtectedRoute user={user} path={path}>
+            {element}
+          </ProtectedRoute>} />;
+      })}
       <Route path='*' element={
         <main className="main main__welcome">
           <ErrorMessage error={new Error('404 not found')}/>
