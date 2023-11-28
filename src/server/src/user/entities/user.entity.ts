@@ -25,16 +25,11 @@ export class User {
   @Column({ type: 'varchar', select: false })
   password: string;
 
-  @Column({ type: 'enum', enum: ['m', 'f', 'u'] })
-  /**
-   * m - male
-   * f - female
-   * u - unspecified
-   */
+  @Column({ type: 'enum', enum: ['male', 'female', 'other'] })
   gender: string;
 
   @Column({ type: 'enum', enum: Role })
-  role: string = Role.User;
+  role: Role;
 
   @Column({ type: 'varchar', nullable: true })
   fileLink?: string;
