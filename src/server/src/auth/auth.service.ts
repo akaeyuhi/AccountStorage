@@ -40,6 +40,7 @@ export class AuthService {
     return {
       accessToken: await this.jwtService.signAsync(payload),
       user: {
+        id: user.id,
         role: user.role,
         email: user.email,
       },
