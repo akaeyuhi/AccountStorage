@@ -4,7 +4,7 @@ import AuthService from '../services/AuthService';
 import userSlice from 'features/user/userSlice';
 import UserService from 'services/UserService';
 
-const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:4000/';
+const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000/api/';
 
 const authService = new AuthService(baseURL + 'auth');
 const userService = new UserService(baseURL + 'user');
